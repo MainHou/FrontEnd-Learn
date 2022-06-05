@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "egg-demo-01"
+		},
+		{
+			"path": "learn-FE"
+		},
+		{
+			"path": "node-demo"
+		},
+		{
+			"path": "nuxt-demo"
+		},
+		{
+			"path": "vue3-ts-vite"
+		},
+		{
+			"path": "vue3-webpack-ts"
+		}
+	],
+	"settings": {}
+}
