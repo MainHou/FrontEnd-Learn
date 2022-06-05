@@ -1,88 +1,93 @@
 <template>
-  <div class="home">
-    <div>
-      <div>{{ count }}</div>
-      <button @click="increment">+</button>
-      <button @click="decrease">-</button>
-    </div>
-
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="todo-list">
+    <input type="text" v-model="title" @keydown.enter="addTodo" />
+    <button @click="clear">清空数据</button>
+    <ul v-if="todos.length">
+      <li
+        v-for="(todo, index) in todos"
+        :key="todo.title + index"
+        :class="{done: todo.done}"
+      >
+        <input type="checkbox" v-model="todo.done" />
+        <span> {{ todo.title }}</span>
+      </li>
+    </ul>
+    <div v-else>暂无数据</div>
+  </div>
+  <div class="option">
+    全选<input type="checkbox" v-model="allDone" />
+    <span class="statisitics">{{ active }}/{{ all }}</span>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  onBeforeMount,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted,
-  onUnmounted,
-  onUpdated,
-} from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue';
-import {useCounterStore} from '@/store/modules/counter';
-import {storeToRefs} from 'pinia';
+import {computed, defineComponent, reactive, toRefs} from 'vue';
+
+interface Todo {
+  title: string;
+  done: boolean;
+}
 
 export default defineComponent({
   name: 'Home',
   setup() {
-    const counterStore = useCounterStore();
-    const {count} = storeToRefs(counterStore);
-    const {increment, decrease} = counterStore;
-    // 第一种方式，直接修改store中的state，不推荐
-    counterStore.count++;
-    // 第二种方式，$patch 可以同时修改多个值
-    counterStore.$patch({count: counterStore.count});
-    counterStore.$patch((store) => {
-      store.count = 1;
+    // 数据
+    const data = reactive({
+      title: '',
+      todos: [
+        {title: '吃饭', done: true},
+        {title: '睡觉', done: false},
+      ] as Todo[],
     });
-    // 第三种方式，直接修改store中的state，不推荐
-    increment();
 
-    const resetData = () => {
-      counterStore.$reset();
+    // 任务总数
+    const all = computed(() => data.todos.length);
+    // 当前任务
+    const active = computed(
+      () => data.todos.filter((todo) => !todo.done).length
+    );
+    // 已完成的任务
+    const allDone = computed({
+      get: function () {
+        return active.value === 0;
+      },
+      set: function (val: boolean) {
+        data.todos.forEach((todo) => {
+          todo.done = val;
+        });
+      },
+    });
+
+    /**
+     * 添加任务
+     */
+    const addTodo = () => {
+      data.todos.push({title: data.title, done: false});
+      data.title = '';
     };
 
-    //生命周期
-    console.log('setup');
-
-    onBeforeMount(() => {
-      console.log('onBeforeMount');
-    });
-
-    onMounted(() => {
-      console.log('onMounted');
-    });
-
-    onBeforeUpdate(() => {
-      console.log('onBeforeUpdate');
-    });
-
-    onUpdated(() => {
-      console.log('onUpdated');
-    });
-
-    onBeforeUnmount(() => {
-      console.log('onBeforeUnmount');
-    });
-
-    onUnmounted(() => {
-      console.log('onUnmounted');
-    });
+    /**
+     * 清空任务列表
+     */
+    const clear = () => {
+      data.todos.length = 0;
+    };
 
     return {
-      count,
-      resetData,
-      increment,
-      decrease,
+      ...toRefs(data),
+      all,
+      active,
+      allDone,
+      addTodo,
+      clear,
     };
-  },
-  beforeCreate() {
-    console.log('beforeCreate');
-  },
-  components: {
-    HelloWorld,
   },
 });
 </script>
+
+<style scoped>
+.done {
+  color: gray;
+  text-decoration: line-through;
+}
+</style>
