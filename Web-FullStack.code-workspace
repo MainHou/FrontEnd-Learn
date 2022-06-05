@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "vue3-webpack-ts"
+		},
+		{
+			"path": "typescript-demo"
 		}
 	],
 	"settings": {}
