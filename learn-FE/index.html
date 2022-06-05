@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .square {
+      width: 30%;
+      overflow: hidden;
+      background: yellow;
+    }
+
+    .square::after {
+      content: '';
+      display: block;
+      margin-top: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div id="container">
+      <h1 id="title">我是标题</h1>
+      <p id="content">我是内容</p>
+    </div>
+  </main>
+  <script>
+    let x = 0;
+    const timer = setInterval(() => {
+      if(x>=5) {
+        clearInterval(timer);
+        return;
+      }
+      console.log(++x);
+    }, 1000)
+  </script>
+</body>
+
+</html>
