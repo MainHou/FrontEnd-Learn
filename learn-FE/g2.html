@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G2</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <!-- 引入在线资源，选择你需要的 g2 版本以替换 version 变量 -->
+  <script src="https://cdn.jsdelivr.net/npm/@antv/g2@4.2.3/dist/g2.min.js"></script>
+  <script>
+    const data = [
+      { year: '1951 年', sales: 38 },
+      { year: '1952 年', sales: 52 },
+      { year: '1956 年', sales: 61 },
+      { year: '1957 年', sales: 145 },
+      { year: '1958 年', sales: 48 },
+      { year: '1959 年', sales: 38 },
+      { year: '1960 年', sales: 38 },
+      { year: '1962 年', sales: 38 },
+    ];
+    const chart = new G2.Chart({
+      container: 'container',
+      autoFit: true,
+      height: 500,
+    });
+
+    chart.data(data);
+    chart.scale('sales', {
+      nice: true,
+    });
+
+    chart.tooltip({
+      showMarkers: false,
+    });
+    chart.interaction('active-region');
+
+    chart.interval().position('year*sales');
+
+    chart.render();
+  </script>
+</body>
+
+</html>
