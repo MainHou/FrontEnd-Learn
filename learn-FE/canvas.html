@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas</title>
+  </head>
+  <body>
+    <canvas width="512" height="512"></canvas>
+    <script>
+      const canvas = document.querySelector('canvas');
+      const content = canvas.getContext('2d');
+      content.rect(0.5 * canvas.width, 0.5 * canvas.height, 100, 100);
+      
+    </script>
+  </body>
+</html>
