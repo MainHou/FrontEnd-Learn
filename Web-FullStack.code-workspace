@@ -1,11 +1,22 @@
 {
-	"folders": [
-		{
-			"path": "learn-FE"
-		},
-		{
-			"path": "typescript-demo"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "name": "learn-FE",
+      "path": "learn-FE"
+    },
+    {
+      "name": "typescript-demo",
+      "path": "typescript-demo"
+    },
+    {
+      "path": "learn-react/react-demo01"
+    },
+    {
+      "path": "learn-node.js"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "learn-FE",
+    "liveServer.settings.port": 5541
+  }
 }
