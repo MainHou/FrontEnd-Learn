@@ -13,6 +13,9 @@
     },
     {
       "path": "learn-node.js"
+    },
+    {
+      "path": "vite-project"
     }
   ],
   "settings": {
