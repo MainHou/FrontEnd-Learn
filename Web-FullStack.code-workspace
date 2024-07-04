@@ -15,7 +15,10 @@
       "path": "learn-node.js"
     },
     {
-      "path": "vite-project"
+      "path": "vue-project"
+    },
+    {
+      "path": "nuxt-project"
     }
   ],
   "settings": {
